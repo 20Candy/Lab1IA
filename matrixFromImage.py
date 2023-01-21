@@ -34,7 +34,8 @@ def matrixFromImage(image):
     # assign values to the different color pixels
     color_matrix[np.where(red_pixels == 255)] = 2
     color_matrix[np.where(lower_green == 255)] = 3
-    color_matrix[np.where(lower_black == 255)] = 0
-    color_matrix[np.where(lower_white == 255)] = 1
+    color_matrix[np.where(lower_black == 255)] = 1
+    color_matrix[np.where(lower_white == 255)] = 0
+
 
     return color_matrix

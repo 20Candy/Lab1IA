@@ -5,7 +5,7 @@ def toPixelArt(image):
     im = Image.open(image)
 
     # Resize image
-    im = im.resize((100, 100))
+    im = im.resize((80, 80))
 
     # Create a new image with a white background
     pixelated = Image.new('RGB', im.size, (255, 255, 255))
