@@ -37,6 +37,4 @@ def matrixFromImage(image):
     color_matrix[np.where(lower_black == 255)] = 0
     color_matrix[np.where(lower_white == 255)] = 1
 
-    print(color_matrix)
-
     return color_matrix

@@ -1,34 +1,39 @@
 def dfs(matrix):
 
-    # matrix = [[1, 1, 1, 1, 1],
-    #     [1, 0, 0, 0, 1],
-    #     [1, 0, 1, 0, 1],
-    #     [1, 0, 2, 0, 1],
-    #     [1, 1, 1, 3, 1]]
+    matrix = [[1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1],
+    [1, 0, 2, 0, 1],
+    [1, 1, 1, 3, 1]]
 
-    for y in range(len(matrix)):
-        for x in range(len(matrix[0])):
-            if matrix[y][x] == 2:
-                start = (x, y)
-            elif matrix[y][x] == 3:
-                end = (x, y)
+    start = None
+    goal = None
+
+    #serach for start and end
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix[i][j] == 2:
+                start = (i, j)
+            elif matrix[i][j] == 3:
+                goal = (i, j)
+
 
     stack = [(start, [start])]
-    visited = set()
-
     while stack:
         (vertex, path) = stack.pop()
-
-        if vertex not in visited:
-            visited.add(vertex)
-
-            x, y = vertex
-            for dx, dy in [(1,0), (-1,0), (0,1), (0,-1)]:
-                if 0<=x+dx<len(matrix) and 0<=y+dy<len(matrix[0]) and matrix[x+dx][y+dy]!=1:
-                    if (x+dx, y+dy) == end:
-                        
-                        return path + [(x+dx, y+dy)]
-                    else:
-                        stack.append(((x+dx, y+dy), path + [(x+dx, y+dy)]))
-
+        for next_vertex in get_adjacent_vertices(matrix, vertex):
+            if next_vertex in path:
+                continue
+            if next_vertex == goal:
+                return path + [next_vertex]
+            stack.append((next_vertex, path + [next_vertex]))
     return None
+
+def get_adjacent_vertices(matrix, vertex):
+    x, y = vertex
+    rows = len(matrix)
+    cols = len(matrix[0])
+    adjacent_vertices = [(x-1, y), (x, y-1), (x+1, y), (x, y+1)]
+    adjacent_vertices = [(x, y) for x, y in adjacent_vertices if 0 <= x < rows and 0 <= y < cols and matrix[x][y] != 1]
+    return adjacent_vertices
+

@@ -30,9 +30,13 @@ def main():
 
         if opcion == 1:
             path = bfs.bfs(matrix)
+            print(path)
+
 
         elif opcion == 2:
-            path = dfs.dfs()
+            path = dfs.dfs(matrix)
+            print(path)
+
 
         elif opcion == 3:
             print("Opcion 3")
@@ -42,7 +46,7 @@ def main():
         else:
             print("Opcion no valida")
 
-        paintOnImage.paintOnImage("prueba1.bmp",path)
+        # paintOnImage.paintOnImage("prueba1.bmp",path)
 
 
 if __name__ == "__main__":
