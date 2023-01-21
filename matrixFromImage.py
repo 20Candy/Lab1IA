@@ -9,20 +9,19 @@ def matrixFromImage(image):
     new_image = image.resize((50,50))
     new_image.save("prueba1_short.bmp")
 
-    #image = Image.open(image)
-    width, height = new_image.size
-    matrix = []
-    for y in range(height):
-        row = []
-        for x in range(width):
-            if image.getpixel((x,y)) == (0,0,0):
-                row.append(1)
-            elif image.getpixel((x,y)) == (255,0,0):
-                row.append(2)#red
-            elif image.getpixel((x,y)) == (0,255,0):
-                row.append(3)#green
-            elif image.getpixel((x,y)) == (255,255,255):
-                row.append(0)
+    height, width, _ = new_image.shape
 
-        matrix.append(row)
+    matrix = [[0 for _ in range(width)] for _ in range(height)]
+
+    for y in range(height):
+        for x in range(width):
+            b, g, r = new_image[y, x]
+            if (b, g, r) == (0, 0, 0): # black
+                matrix[y][x] = 0
+            elif (b, g, r) == (255, 255, 255): # white
+                matrix[y][x] = 1
+            elif (b, g, r) == (0, 0, 255): # red
+                matrix[y][x] = 2
+            elif (b, g, r) == (0, 255, 0): # green
+                matrix[y][x] = 3
     return matrix
