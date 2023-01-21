@@ -10,6 +10,6 @@ def paintOnImage(file, shortest_path):
 
     for x, y in shortest_path:
         # Paint each pixel of the path with the color lila
-        img[y, x] = lila    # Save the modified image
+        img[y, x] = lila   
 
     cv2.imwrite("modified_image.bmp", img)

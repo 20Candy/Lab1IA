@@ -19,9 +19,13 @@ def main():
 
     if opcion == 1:
 
-        image = Image.open("prueba1.bmp")
-        matrix = matrixFromImage.matrixFromImage(image)
+        matrix = matrixFromImage.matrixFromImage("prueba1.bmp")
         path = bfs.bfs(matrix)
-        paintOnImage.paintOnImage("prueba1.bmp",path)
+        # paintOnImage.paintOnImage("prueba1.bmp",path)
+
+
+if __name__ == "__main__":
+    main()
+
 
        
