@@ -2,11 +2,11 @@ from collections import deque
 
 def bfs(matrix):
 
-    # matrix = [[1, 1, 1, 1, 1],
-    #     [1, 0, 0, 0, 1],
-    #     [1, 0, 1, 0, 1],
-    #     [1, 0, 2, 0, 1],
-    #     [1, 1, 1, 3, 1]]
+    matrix = [[1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 2, 0, 1],
+        [1, 1, 1, 3, 1]]
 
     #initializing start and end
     start = None

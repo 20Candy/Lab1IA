@@ -28,7 +28,7 @@ def main():
             toPixelArt.toPixelArt("prueba1.bmp")
             matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
             path = bfs.bfs(matrix)
-            # paintOnImage.paintOnImage("prueba1.bmp",path)
+            paintOnImage.paintOnImage("prueba1.bmp",path)
 
         elif opcion == 2:
             print("Opcion 2")
