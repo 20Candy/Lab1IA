@@ -2,28 +2,41 @@
 # 0 is white and 1 is black
 
 import cv2
-import sys
+import numpy as np
 
 def matrixFromImage(image):
 
+    # read the image
     img = cv2.imread(image)
 
-    height, width, _ = img.shape
+    # convert the image to the HSV color space
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    matrix = [[0 for _ in range(width)] for _ in range(height)]
+    # define the range of red color in HSV
+    lower_red = cv2.inRange(hsv, (0, 50, 50), (10, 255, 255))
+    upper_red = cv2.inRange(hsv, (160, 50, 50), (180, 255, 255))
 
-    for y in range(height):
-        for x in range(width):
-            b, g, r = img[y, x]
-            if (b, g, r) == (0, 0, 0): # black
-                matrix[y][x] = 0
-            elif (b, g, r) == (255, 255, 255): # white
-                matrix[y][x] = 1
-            elif (b, g, r) == (0, 0, 255): # red
-                matrix[y][x] = 2
-                print("red")
-            elif (b, g, r) == (0, 255, 0): # green
-                matrix[y][x] = 3
-                print("green")
+    # merge the upper and lower range of red
+    red_pixels = cv2.addWeighted(lower_red, 1.0, upper_red, 1.0, 0.0)
 
-    return matrix
+    # define the range of green color in HSV
+    lower_green = cv2.inRange(hsv, (40,50,50), (70,255,255))
+
+    # define the range of black color
+    lower_black = cv2.inRange(hsv, (0, 0, 0), (180, 255, 30))
+
+    # define the range of white color
+    lower_white = cv2.inRange(hsv, (0, 0, 200), (180, 30, 255))
+
+    # create an empty matrix with the same shape as the image
+    color_matrix = np.zeros(img.shape[:2], dtype=np.uint8)
+
+    # assign values to the different color pixels
+    color_matrix[np.where(red_pixels == 255)] = 2
+    color_matrix[np.where(lower_green == 255)] = 3
+    color_matrix[np.where(lower_black == 255)] = 0
+    color_matrix[np.where(lower_white == 255)] = 1
+
+    print(color_matrix)
+
+    return color_matrix

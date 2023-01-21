@@ -12,7 +12,6 @@ from PIL import Image
 def main():
 
     #menuwith while
-
     while True:
         print("\nInteligencia Artificial")
 
@@ -29,13 +28,13 @@ def main():
             toPixelArt.toPixelArt("prueba1.bmp")
             matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
             path = bfs.bfs(matrix)
-            paintOnImage.paintOnImage("prueba1.bmp",path)
+            # paintOnImage.paintOnImage("prueba1.bmp",path)
 
-        if opcion == 2:
+        elif opcion == 2:
             print("Opcion 2")
-        if opcion == 3:
+        elif opcion == 3:
             print("Opcion 3")
-        if opcion == 4:
+        elif opcion == 4:
             print("Gracias por usar el programa")
             break
         else:
