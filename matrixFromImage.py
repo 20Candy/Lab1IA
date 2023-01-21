@@ -24,4 +24,6 @@ def matrixFromImage(image):
                 matrix[y][x] = 2
             elif (b, g, r) == (0, 255, 0): # green
                 matrix[y][x] = 3
+
+    print (matrix)
     return matrix
