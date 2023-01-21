@@ -4,6 +4,7 @@
 
 import matrixFromImage
 import bfs
+import dfs
 import paintOnImage
 import toPixelArt
 
@@ -23,15 +24,16 @@ def main():
         #seleccion de opcion
         opcion = int(input("Ingrese la opcion que desea: "))
 
-        if opcion == 1:
+        
+        toPixelArt.toPixelArt("prueba1.bmp")
+        matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
 
-            toPixelArt.toPixelArt("prueba1.bmp")
-            matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
+        if opcion == 1:
             path = bfs.bfs(matrix)
-            paintOnImage.paintOnImage("prueba1.bmp",path)
 
         elif opcion == 2:
-            print("Opcion 2")
+            path = dfs.dfs()
+
         elif opcion == 3:
             print("Opcion 3")
         elif opcion == 4:
@@ -39,6 +41,8 @@ def main():
             break
         else:
             print("Opcion no valida")
+
+        paintOnImage.paintOnImage("prueba1.bmp",path)
 
 
 if __name__ == "__main__":
