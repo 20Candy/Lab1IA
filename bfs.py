@@ -1,10 +1,6 @@
 from collections import deque
 
-def bfs():
-    matrix = [[1, 0, 1, 2],
-            [1, 0, 1, 3],
-            [1, 1, 1, 1],
-            [0, 2, 1, 1]]
+def bfs(matrix):
 
     def find_start():
         for i in range(len(matrix)):

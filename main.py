@@ -26,12 +26,9 @@ def main():
 
         toPixelArt.toPixelArt("prueba1.bmp")
         matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
-        print(matrix)
-
-        # print(matrix)
 
         if opcion == 1:
-            path = bfs.bfs()
+            path = bfs.bfs(matrix)
             print(path)
 
 
