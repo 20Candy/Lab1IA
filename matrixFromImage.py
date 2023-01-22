@@ -1,41 +1,33 @@
-#from an image get matrix thar represents if a pixels is black or white
-# 0 is white and 1 is black
 
-import cv2
+from PIL import Image
 import numpy as np
 
 def matrixFromImage(image):
 
-    # read the image
-    img = cv2.imread(image)
+    image = Image.open(image)
+    pixels = image.load()
 
-    # convert the image to the HSV color space
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    width, height = image.size
+    color_matrix = [[0 for _ in range(width)] for _ in range(height)]
 
-    # define the range of red color in HSV
-    lower_red = cv2.inRange(hsv, (0, 50, 50), (10, 255, 255))
-    upper_red = cv2.inRange(hsv, (160, 50, 50), (180, 255, 255))
+    red_like = 200
+    green_like= 200
 
-    # merge the upper and lower range of red
-    red_pixels = cv2.addWeighted(lower_red, 1.0, upper_red, 1.0, 0.0)
+    # Iterate through the pixels
+    for i in range(width):
+        for j in range(height):
+            # Get the pixel color
+            r, g, b = pixels[i, j]
 
-    # define the range of green color in HSV
-    lower_green = cv2.inRange(hsv, (40,50,50), (70,255,255))
-
-    # define the range of black color
-    lower_black = cv2.inRange(hsv, (0, 0, 0), (180, 255, 30))
-
-    # define the range of white color
-    lower_white = cv2.inRange(hsv, (0, 0, 200), (180, 30, 255))
-
-    # create an empty matrix with the same shape as the image
-    color_matrix = np.zeros(img.shape[:2], dtype=np.uint8)
-
-    # assign values to the different color pixels
-    color_matrix[np.where(red_pixels == 255)] = 2
-    color_matrix[np.where(lower_green == 255)] = 3
-    color_matrix[np.where(lower_black == 255)] = 1
-    color_matrix[np.where(lower_white == 255)] = 0
+            # Compare the color to the given values
+            if r == 0 and g == 0 and b == 0:
+                color_matrix[i][j] = 0  # Black
+            elif r == 255 and g == 255 and b == 255:
+                color_matrix[i][j] = 1  # White
+            elif r > red_like and g < red_like and b < red_like:
+                color_matrix[i][j] = 2  # Red-like
+            elif r < green_like and g > green_like and b < green_like:
+                color_matrix[i][j] = 3  # Green-like
 
 
     return color_matrix

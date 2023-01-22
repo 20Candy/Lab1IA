@@ -24,8 +24,9 @@ def main():
         #seleccion de opcion
         opcion = int(input("Ingrese la opcion que desea: "))
 
-        # toPixelArt.toPixelArt("prueba1.bmp")
-        # matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
+        toPixelArt.toPixelArt("prueba1.bmp")
+        matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
+        print(matrix)
 
         # print(matrix)
 

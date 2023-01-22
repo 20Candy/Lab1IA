@@ -4,6 +4,7 @@ def dfs():
             [1, 1, 1, 1],
             [0, 2, 1, 1]]
 
+
     def find_start():
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
