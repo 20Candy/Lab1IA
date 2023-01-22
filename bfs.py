@@ -1,50 +1,71 @@
 from collections import deque
 
-def bfs(matrix):
+def bfs():
+    matrix = [[1, 0, 1, 2],
+            [1, 0, 1, 3],
+            [1, 1, 1, 1],
+            [0, 2, 1, 1]]
 
-    # matrix = [[1, 1, 1, 1, 1],
-    #     [1, 0, 0, 0, 1],
-    #     [1, 0, 1, 0, 1],
-    #     [1, 0, 2, 0, 1],
-    #     [1, 1, 1, 3, 1]]
+    def find_start():
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                if matrix[i][j] == 2:
+                    return (i, j)
+        return None
 
-    #initializing start and end
-    start = None
-    end = None
+    def actions(state):
+        x, y = state
+        actions = []
+        if x > 0 and matrix[x-1][y] != 0:
+            actions.append("up")
+        if x < len(matrix)-1 and matrix[x+1][y] != 0:
+            actions.append("down")
+        if y > 0 and matrix[x][y-1] != 0:
+            actions.append("left")
+        if y < len(matrix[0])-1 and matrix[x][y+1] != 0:
+            actions.append("right")
+        return actions
 
-    #serach for start and end
-    for y in range(len(matrix)):
-        for x in range(len(matrix[0])):
-            if matrix[y][x] == 2:
-                start = (x, y)
-            elif matrix[y][x] == 3:
-                end = (x, y)
+    def result(state, action):
+        x, y = state
+        if action == "up":
+            return (x-1, y)
+        elif action == "down":
+            return (x+1, y)
+        elif action == "left":
+            return (x, y-1)
+        elif action == "right":
+            return (x, y+1)
 
-    queue = deque([start])
+    def goalTest(state):
+        x, y = state
+        return matrix[x][y] == 3
 
-    visited = []
+    def stepCost(state, action):
+        return 1 # all steps have the same cost
 
-    shortest_path = []
+    def pathCost(path):
+        return len(path) - 1
 
-    while queue:
-        x, y = queue.popleft()
+    def BFS(start):
+        queue = deque([(start, [start])])
+        visited = set()
+        while queue:
+            state, path = queue.popleft()
+            if goalTest(state):
+                return path
+            if state in visited:
+                continue
+            visited.add(state)
+            for action in actions(state):
+                new_state = result(state, action)
+                new_path = path + [new_state]
+                queue.append((new_state, new_path))
+        return None
 
-        visited.append((x, y))
-
-        # Check if we have reached the end
-        if matrix[y][x] == 3:
-            while (x, y) != start:
-                shortest_path.append((x, y))
-                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                    if (x+dx, y+dy) in visited:
-                        x, y = x+dx, y+dy
-                        break
-            shortest_path.reverse()
-
-            return shortest_path
-        
-        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-            if 0 <= x+dx < len(matrix[0]) and 0 <= y+dy < len(matrix) and matrix[y+dy][x+dx] != 1 and (x+dx, y+dy) not in visited:
-                queue.append((x+dx, y+dy))
-
+    start = find_start()
+    path = BFS(start)
+    if path:
+        return path
+    
     return None
