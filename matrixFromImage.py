@@ -13,13 +13,10 @@ def matrixFromImage(image):
     red_like = 200
     green_like= 200
 
-    # Iterate through the pixels
     for i in range(width):
         for j in range(height):
-            # Get the pixel color
             r, g, b = pixels[i, j]
 
-            # Compare the color to the given values
             if r == 0 and g == 0 and b == 0:
                 color_matrix[i][j] = 0  # Black
             elif r == 255 and g == 255 and b == 255:
