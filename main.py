@@ -5,6 +5,7 @@
 import matrixFromImage
 import bfs
 import dfs
+import astar
 import paintOnImage
 import toPixelArt
 
@@ -38,7 +39,19 @@ def main():
 
 
         elif opcion == 3:
-            print("Opcion 3")
+            #astar
+            heristica = input("\nA* / Ingrese la heuristica que desea: \n 1. Manhattan \n 2. Euclidea\n")
+            if(heristica == '1'):
+                astarPath = astar.astar(matrix, 'Manhattan')
+                path = astarPath.path
+                
+            elif(heristica == '2'):
+                astarPath = astar.astar(matrix, 'Euclidean')
+                path = astarPath.path
+            
+            print(path)
+
+
         elif opcion == 4:
             print("Gracias por usar el programa")
             break
