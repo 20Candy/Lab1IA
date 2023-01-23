@@ -1,12 +1,12 @@
 #INELIGENCIA ARTIFICIAL
 #AUTORES: STEFANO ARAGONI, LUIS DIEGO SANTOS, CAROL AREVALO
 
-import matrixFromImage
-import bfs
-import dfs
-import astar
-import paintOnImage
-import toPixelArt
+import modules.matrixFromImage as matrixFromImage
+import modules.bfs as bfs
+import modules.dfs as dfs
+import modules.astar as astar
+import modules.paintOnImage as paintOnImage
+import modules.toPixelArt as toPixelArt
 
 def main():
     print("\nArchivos disponibles:")
@@ -17,11 +17,11 @@ def main():
     opcion = int(input("Ingrese la opcion que desea: "))
 
     if opcion == 1:
-        file = "prueba1.bmp"
+        file = "tests/prueba1.bmp"
     elif opcion == 2:
-        file = "prueba2.bmp"
+        file = "tests/prueba2.bmp"
     elif opcion == 3:
-        file = "prueba3.bmp"
+        file = "tests/prueba3.bmp"
 
 
     #menuwith while
@@ -37,17 +37,13 @@ def main():
         opcion = int(input("Ingrese la opcion que desea: "))
 
         toPixelArt.toPixelArt(file)
-        matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
+        matrix = matrixFromImage.matrixFromImage("temp/pixelart.bmp")
 
         if opcion == 1:
             path = bfs.bfs(matrix)
-            print(path)
-
 
         elif opcion == 2:
             path = dfs.dfs(matrix)
-            print(path)
-
 
         elif opcion == 3:
             #astar
@@ -59,9 +55,6 @@ def main():
             elif(heristica == '2'):
                 astarPath = astar.astar(matrix, 'Euclidean')
                 path = astarPath.path
-            
-            print(path)
-
 
         elif opcion == 4:
             print("Gracias por usar el programa")
@@ -69,7 +62,7 @@ def main():
         else:
             print("Opcion no valida")
 
-        paintOnImage.paintOnImage("pixelart.bmp",path)
+        paintOnImage.paintOnImage("temp/pixelart.bmp",path)
 
 
 if __name__ == "__main__":

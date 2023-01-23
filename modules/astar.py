@@ -1,5 +1,5 @@
 from collections import deque
-import nodos
+import modules.nodos as nodos
 
 class astar():
 

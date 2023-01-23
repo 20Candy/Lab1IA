@@ -119,4 +119,4 @@ def toPixelArt(image):
             
             ImageDraw.Draw(pixelated).rectangle([(x, y), (x + 5, y + 5)], fill=pixel_color)
 
-    pixelated.save('pixelart.bmp')
+    pixelated.save('temp/pixelart.bmp')
