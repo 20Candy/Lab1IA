@@ -1,10 +1,4 @@
-def dfs():
-    matrix = [[1, 0, 1, 2],
-            [1, 0, 1, 3],
-            [1, 1, 1, 1],
-            [0, 2, 1, 1]]
-
-
+def dfs(matrix):
     def find_start():
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
@@ -48,10 +42,14 @@ def dfs():
 
     def DFS(start):
         stack = [(start, [start])]
+        visited = set()
         while stack:
             state, path = stack.pop()
             if goalTest(state):
                 return path
+            if state in visited:
+                continue
+            visited.add(state)
             for action in actions(state):
                 new_state = result(state, action)
                 new_path = path + [new_state]

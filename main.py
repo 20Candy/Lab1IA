@@ -33,7 +33,7 @@ def main():
 
 
         elif opcion == 2:
-            path = dfs.dfs()
+            path = dfs.dfs(matrix)
             print(path)
 
 
