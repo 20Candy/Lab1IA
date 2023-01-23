@@ -10,8 +10,12 @@ def paintOnImage(file, shortest_path):
     path_color = (0,0,255)  # red
 
     for i, j in shortest_path:
+        for x in range(i*5, (i*5) + 5):
+            for y in range((j*5), (j*5) + 5):
 
-        pixels[i, j] = path_color
+                #check if current position is not red or green
+                if pixels[x, y] != (255, 0, 0) and pixels[x, y] != (0, 255, 0):
+                    pixels[x, y] = path_color
 
     path_image.save("result.jpg")
 
