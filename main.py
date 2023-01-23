@@ -5,6 +5,7 @@
 import matrixFromImage
 import bfs
 import dfs
+import astar
 import paintOnImage
 import toPixelArt
 
@@ -38,7 +39,12 @@ def main():
 
 
         elif opcion == 3:
-            print("Opcion 3")
+            #astar
+            astarPath = astar.astar(matrix, "Manhattan")
+            path = astarPath.path
+            print(path)
+
+
         elif opcion == 4:
             print("Gracias por usar el programa")
             break
