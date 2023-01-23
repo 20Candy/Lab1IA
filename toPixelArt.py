@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 def toPixelArt(image):
 
     im = Image.open(image)
-    im = im.resize((100, 100))
+    im = im.resize((140, 140))
 
     pixelated = Image.new('RGB', im.size, (255, 255, 255))
     pixels = im.load()
