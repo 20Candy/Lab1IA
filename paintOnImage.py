@@ -1,15 +1,17 @@
-import cv2
+from PIL import Image
 
 def paintOnImage(file, shortest_path):
 
-    img = cv2.imread(file)
 
-    height, width, _ = img.shape
+    image = Image.open(file)
+    path_image = image.copy()
+    pixels = path_image.load()
 
-    lila = (255, 0, 255)
+    path_color = (0,0,255)  # red
 
-    for x, y in shortest_path:
-        # Paint each pixel of the path with the color lila
-        img[y, x] = lila   
+    for i, j in shortest_path:
 
-    cv2.imwrite("modified_image.bmp", img)
+        pixels[i, j] = path_color
+
+    path_image.save("result.jpg")
+

@@ -45,7 +45,7 @@ def main():
         else:
             print("Opcion no valida")
 
-        # paintOnImage.paintOnImage("prueba1.bmp",path)
+        paintOnImage.paintOnImage("pixelart.bmp",path)
 
 
 if __name__ == "__main__":
