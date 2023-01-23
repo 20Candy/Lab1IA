@@ -5,9 +5,9 @@ class nodos:
     def __init__(self, position=None, visited=False, parent=None):
         self.position = position
 
-        self.g = 0
-        self.h = 0
-        self.f = 0
+        self.g = 1000000
+        self.h = 1000000
+        self.f = 1000000
         self.visited = visited
         self.parent = parent
 

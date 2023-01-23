@@ -80,16 +80,18 @@ class astar():
     def astar(self, start):
 
         shortestPath = []
-
-        nodeMatrix = []
-        for i in range(len(self.matrix)):
-            nodeMatrix.append([])
-            for j in range(len(self.matrix[i])):
-
-                tempNode = nodos.nodos((i, j))
-                nodeMatrix[i].append(tempNode)
+        currentPath = []
         
         for end in self.endings:
+            
+            nodeMatrix = []
+            for i in range(len(self.matrix)):
+                nodeMatrix.append([])
+                for j in range(len(self.matrix[i])):
+
+                    tempNode = nodos.nodos((i, j))
+                    nodeMatrix[i].append(tempNode)
+
             visited = []
             visited.append(start)
   
@@ -128,30 +130,56 @@ class astar():
                             nextObj.setF()
                             nextObj.visited = False
 
-                find = False
+
+                temporal_nodeMatrix = []
+
                 for nodes in nodeMatrix:
-                    #look for the node with the lowest f value that has not been visited yet
-                    # if tie, pick lowest h value
-                    nodes.sort(key=lambda x: x.f)
-
-
                     for node in nodes:
-                        if node.visited == False:
-                            node.visited = True
-                            visited.append(node.position)
-                            find = True
-                            break
-                    if find:
+                        temporal_nodeMatrix.append(node)
+
+                temporal_nodeMatrix.sort(key=lambda x: x.f)
+
+                for node in temporal_nodeMatrix:
+                    if node.visited == False:
+                        node.visited = True
+                        visited.append(node.position)
                         break
 
-                if self.goalTest(visited[-1]):
-                    shortestPath = visited
+                #================== CALCULO DE CAMINO ==================
+                path_temp = []
+
+                if visited[-1] == end:
+                    current_node = nodeMatrix[end[0]][end[1]]
+
+                    while current_node.position != start:
+                        path_temp.append(current_node.position)
+                        current_node = current_node.parent
+
+                    currentPath.append(path_temp[::-1])
                     break
 
+                #================== EN CASO NO ENCUENTRE CAMINO ==================
+
                 if nodes_checked == len(visited):
-                    shortestPath = []
+                    currentPath.append([])
                     break
 
                 nodes_checked += 1
 
-            return shortestPath
+            #================== ELIGE CAMINO MAS RAPIDO ==================
+            
+
+            min = 0
+            for i in range(len(currentPath)):
+                if len(currentPath[i]) < len(currentPath[min]):
+                    min = i
+
+            shortestPath = currentPath[min]
+
+
+        print("\nSe encontraron " + str(len(currentPath)) + " caminos posibles.\n")
+        for i in range(len(currentPath)):
+            print("Camino " + str(i+1) + ": " + str(len(currentPath[i])) + " pasos.")
+        print("\nA*: El camino mas corto es: " + str(len(shortestPath)) + " pasos.\n")
+        
+        return shortestPath
