@@ -1,7 +1,6 @@
 #INELIGENCIA ARTIFICIAL
 #AUTORES: STEFANO ARAGONI, LUIS DIEGO SANTOS, CAROL AREVALO
 
-
 import matrixFromImage
 import bfs
 import dfs
@@ -9,9 +8,21 @@ import astar
 import paintOnImage
 import toPixelArt
 
-from PIL import Image
-
 def main():
+    print("\nArchivos disponibles:")
+    print("1. Prueba 1")
+    print("2. Prueba 2")
+    print("3. Prueba 3")
+
+    opcion = int(input("Ingrese la opcion que desea: "))
+
+    if opcion == 1:
+        file = "prueba1.bmp"
+    elif opcion == 2:
+        file = "prueba2.bmp"
+    elif opcion == 3:
+        file = "prueba3.bmp"
+
 
     #menuwith while
     while True:
@@ -25,7 +36,7 @@ def main():
         #seleccion de opcion
         opcion = int(input("Ingrese la opcion que desea: "))
 
-        toPixelArt.toPixelArt("prueba1.bmp")
+        toPixelArt.toPixelArt(file)
         matrix = matrixFromImage.matrixFromImage("pixelart.bmp")
 
         if opcion == 1:
