@@ -138,7 +138,7 @@ class astar(Framework):
                     for node in nodes:
                         temporal_nodeMatrix.append(node)
 
-                temporal_nodeMatrix.sort(key=lambda x: x.f)
+                temporal_nodeMatrix.sort(key=lambda x:( x.f, x.h))
 
                 for node in temporal_nodeMatrix:
                     if node.visited == False:
@@ -178,9 +178,9 @@ class astar(Framework):
             shortestPath = currentPath[min]
 
 
-        print("\nSe encontraron " + str(len(currentPath)) + " caminos posibles.\n")
+        print("\nSe encontraron " + str(len(currentPath)) + " finales posibles.\n")
         for i in range(len(currentPath)):
-            print("Camino " + str(i+1) + ": " + str(len(currentPath[i])) + " pasos.")
+            print("Camino a final " + str(i+1) + ": " + str(len(currentPath[i])) + " pasos.")
         print("\nA*: El camino mas corto es: " + str(len(shortestPath)) + " pasos.\n")
         
         return shortestPath

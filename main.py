@@ -43,9 +43,13 @@ def main():
             bfsPath = bfs.bfs(matrix)
             path = bfsPath.path
 
+            print("\nBFS: El camino más corto es: ", len(path)-1, " pasos.")
+
         elif opcion == 2:
             dfsPath = dfs.dfs(matrix)
             path = dfsPath.path
+
+            print("\nDFS: El camino más corto es: ", len(path)-1, " pasos.")
 
         elif opcion == 3:
             #astar
