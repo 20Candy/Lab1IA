@@ -38,6 +38,7 @@ def main():
 
         toPixelArt.toPixelArt(file)
         matrix = matrixFromImage.matrixFromImage("temp/pixelart.bmp")
+        path = []
 
         if opcion == 1:
             bfsPath = bfs.bfs(matrix)
