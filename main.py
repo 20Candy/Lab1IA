@@ -44,13 +44,19 @@ def main():
             bfsPath = bfs.bfs(matrix)
             path = bfsPath.path
 
-            print("\nBFS: El camino más corto es: ", len(path)-1, " pasos.")
+            if path == None:
+                print("\nBFS: No se encontro un camino")
+            else:
+                print("\nBFS: El camino más corto es: ", len(path)-1, " pasos.")
 
         elif opcion == 2:
             dfsPath = dfs.dfs(matrix)
             path = dfsPath.path
 
-            print("\nDFS: El camino más corto es: ", len(path)-1, " pasos.")
+            if path == None:
+                print("\nDFS: No se encontro un camino")
+            else:
+                print("\nDFS: El camino más corto es: ", len(path)-1, " pasos.")
 
         elif opcion == 3:
             #astar
@@ -69,7 +75,8 @@ def main():
         else:
             print("Opcion no valida")
 
-        paintOnImage.paintOnImage("temp/pixelart.bmp",path)
+        if path != None:
+            paintOnImage.paintOnImage("temp/pixelart.bmp",path)
 
 
 if __name__ == "__main__":
