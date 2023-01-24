@@ -52,6 +52,8 @@ def main():
         elif opcion == 2:
             dfsPath = dfs.dfs(matrix)
             path = dfsPath.path
+            
+            del dfsPath
 
             if path == None:
                 print("\nDFS: No se encontro un camino")

@@ -50,16 +50,20 @@ class dfs(Framework):
     def pathCost(self, path, begin=None, end=None):
         return len(path) - 1
 
-    def DFS(self, start, path = [], visited = set()):
-        path.append(start)
-        visited.add(start)
-        if self.goalTest(start):
-            return path
-        for action in self.actions(start):
-            neighbour = self.result(start, action)
-            if neighbour not in visited:
-                res = self.DFS(neighbour, path, visited)
-                if res is not None:
-                    return res
-        path.pop()
+    def DFS(self, start):
+        stack = [(start, [start])]
+        visited = set()
+        while stack:
+            state, path = stack.pop()
+            if self.goalTest(state):
+                return path
+            if state in visited:
+                continue
+            visited.add(state)
+            for action in self.actions(state):
+                new_state = self.result(state, action)
+                new_path = path + [new_state]
+                stack.append((new_state, new_path))
         return None
+
+
