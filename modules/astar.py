@@ -1,7 +1,8 @@
 from collections import deque
 import modules.nodos as nodos
+from Framework import Framework
 
-class astar():
+class astar(Framework):
 
     def __init__(self, matrix, heuristic):
         self.matrix = matrix

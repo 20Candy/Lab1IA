@@ -1,28 +1,37 @@
 from collections import deque
+from Framework import Framework
 
-def bfs(matrix):
+class bfs(Framework):
 
-    def find_start():
-        for i in range(len(matrix)):
-            for j in range(len(matrix[i])):
-                if matrix[i][j] == 2:
+    def __init__(self, matrix):
+        self.matrix = matrix
+
+        self.start = self.find_start()
+        path = self.BFS(self.start)
+
+        self.path = path
+
+    def find_start(self):
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix[i])):
+                if self.matrix[i][j] == 2:
                     return (i, j)
         return None
 
-    def actions(state):
+    def actions(self, state):
         x, y = state
         actions = []
-        if x > 0 and matrix[x-1][y] != 0:
+        if x > 0 and self.matrix[x-1][y] != 0:
             actions.append("up")
-        if x < len(matrix)-1 and matrix[x+1][y] != 0:
+        if x < len(self.matrix)-1 and self.matrix[x+1][y] != 0:
             actions.append("down")
-        if y > 0 and matrix[x][y-1] != 0:
+        if y > 0 and self.matrix[x][y-1] != 0:
             actions.append("left")
-        if y < len(matrix[0])-1 and matrix[x][y+1] != 0:
+        if y < len(self.matrix[0])-1 and self.matrix[x][y+1] != 0:
             actions.append("right")
         return actions
 
-    def result(state, action):
+    def result(self, state, action):
         x, y = state
         if action == "up":
             return (x-1, y)
@@ -33,35 +42,28 @@ def bfs(matrix):
         elif action == "right":
             return (x, y+1)
 
-    def goalTest(state):
+    def goalTest(self, state):
         x, y = state
-        return matrix[x][y] == 3
+        return self.matrix[x][y] == 3
 
-    def stepCost(state, action):
+    def stepCost(self, state=None, action=None):
         return 1 # all steps have the same cost
 
-    def pathCost(path):
+    def pathCost(self, path, begin=None, end=None):
         return len(path) - 1
 
-    def BFS(start):
+    def BFS(self, start):
         queue = deque([(start, [start])])
         visited = set()
         while queue:
             state, path = queue.popleft()
-            if goalTest(state):
+            if self.goalTest(state):
                 return path
             if state in visited:
                 continue
             visited.add(state)
-            for action in actions(state):
-                new_state = result(state, action)
+            for action in self.actions(state):
+                new_state = self.result(state, action)
                 new_path = path + [new_state]
                 queue.append((new_state, new_path))
         return None
-
-    start = find_start()
-    path = BFS(start)
-    if path:
-        return path
-    
-    return None
