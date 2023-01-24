@@ -1,0 +1,30 @@
+Para ese laboratorio, se usó la heurística de Manhattan y Euclidiana. 
+
+Se decidió utilizar la heurística de Manhattan ya que, según una extensiva investigación, esta es sumamete eficiente y útil cuando
+se tiene un plano con estructura cuadricular. Esto se debe a que este tipo de heurística recibe 2 puntos y calcula la distancia entre
+ambas ubicaciones no a través de una línea recta, sino que a través de sumar los catetos que se formar al hacer 
+un tríangulo con los respectivos puntos.
+
+En este caso, se estaba trabajando con una matriz (plano cuadricular) que no permitía movimientos diagonales; únicamente arriba, 
+abajo, derecha e izquierda. Asimismo, habían distintos bloqueos y paredes que limitaban el movimiento; por lo cual no era muy eficiente
+usar el valor escalar de la distancia (como una línea recta) entre ambos puntos. 
+
+____________________________________
+
+Ya que se utilizó la distancia Manhattan, se quizo contrastar el funcionamiento de esta con una implementación de una heurística que
+calculara la distancia escalar entre dos puntos a través de una línea recta. Esto es exactamente lo que hace la heurística Euclidiana,
+y es por esa razón que esta también fue implementada.
+
+Esta heurística utiliza la formula de Pitágoras para calcular la distancia entre dos puntos. En otras palabras, la distancia Euclidiana
+es menor a la distancia Manhattan. La fórmula de esta heurística se nos hizo fácil de implementar, ya que se estaba utilizando una matriz,
+se podía saber las coordenadas de los puntos y así fácilmente calcular este valor.
+
+____________________________________
+
+La principal diferencia entre ambas heurísticas utilizadas es que una utiliza el valor de la hipotenusa del triangulo por los dos puntos (más
+un tercer punto intermedio que genera un ángulo de 90 grados) mientras que la otra utiliza la suma de los otros dos catetos. 
+
+Referencias:
+https://medium.com/@kunal_gohrani/different-types-of-distance-metrics-used-in-machine-learning-e9928c5e26c7
+https://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+https://www.sciencedirect.com/topics/computer-science/manhattan-distance
